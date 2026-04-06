@@ -1,0 +1,217 @@
+.admin-form-container {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+.form-header h2 {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.type-toggle {
+  display: flex;
+  background-color: var(--bg-color);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.type-toggle button {
+  padding: 0.5rem 1.5rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+  color: var(--text-muted);
+}
+
+.type-toggle button.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.complex-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group.half { flex: 1 1 calc(50% - 0.75rem); min-width: 200px; }
+.form-group.quarter { flex: 1 1 calc(25% - 1.125rem); min-width: 100px; }
+.form-group.full { width: 100%; }
+
+.form-group label {
+  font-weight: 500;
+  color: var(--text-main);
+  font-size: 0.9rem;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: var(--transition);
+  background-color: var(--input-bg);
+  color: var(--text-main);
+}
+
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  background-color: var(--card-bg);
+}
+
+.form-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.slide-down {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Additional layouts for Admin Dashboard */
+.admin-grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .admin-grid-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.admin-list-container {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+}
+
+.large-select {
+    padding: 1rem !important;
+    font-size: 1.1rem !important;
+}
+
+.students-selection-box {
+    margin-top: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--bg-color);
+}
+
+.selection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: var(--card-bg);
+    color: var(--text-main);
+    border-bottom: 1px solid var(--border-color);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.selection-header label {
+    font-weight: 600;
+    margin: 0;
+}
+
+.select-all {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.students-checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1.5rem;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.student-check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    background-color: var(--card-bg);
+    color: var(--text-main);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.student-check-item:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.student-check-item.selected {
+    background-color: rgba(79, 70, 229, 0.05);
+    border-color: var(--primary-color);
+}
+
+.student-check-item input[type="checkbox"] {
+    margin-top: 0.25rem;
+    width: 1rem;
+    height: 1rem;
+}
+
+.student-check-item label {
+    font-weight: 400;
+    flex: 1;
+    cursor: pointer;
+    line-height: 1.4;
+    font-size: 0.9rem;
+}
+
+.selection-count {
+    font-weight: 600;
+    color: var(--primary-color);
+    background-color: rgba(79, 70, 229, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}

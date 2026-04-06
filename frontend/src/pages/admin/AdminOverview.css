@@ -1,0 +1,175 @@
+.admin-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-bottom: 3rem;
+}
+
+.section-container {
+  margin-top: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Critical Alerts Glassmorphism */
+.critical-alerts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.alert-card {
+  padding: 1.5rem;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+
+.alert-card.high-risk {
+  background: linear-gradient(135deg, rgba(244, 67, 54, 0.1) 0%, rgba(244, 67, 54, 0.02) 100%);
+  border-color: rgba(244, 67, 54, 0.2);
+}
+
+.alert-card.low-attendance {
+  background: linear-gradient(135deg, rgba(255, 152, 0, 0.1) 0%, rgba(255, 152, 0, 0.02) 100%);
+  border-color: rgba(255, 152, 0, 0.2);
+}
+
+.alert-card.open-issues {
+  background: linear-gradient(135deg, rgba(103, 58, 183, 0.1) 0%, rgba(103, 58, 183, 0.02) 100%);
+  border-color: rgba(103, 58, 183, 0.2);
+}
+
+.alert-count {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+}
+
+.high-risk .alert-count { color: #f44336; }
+.low-attendance .alert-count { color: #ff9800; }
+.open-issues .alert-count { color: #673ab7; }
+
+.alert-label {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-main);
+}
+
+.alert-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0.25rem 0 0 0;
+}
+
+/* Premium Chart Boxes */
+.chart.stat-icon.faculties { color: #2196F3; background-color: rgba(33, 150, 243, 0.1); }
+.stat-icon.students { color: #4CAF50; background-color: rgba(76, 175, 80, 0.1); }
+.stat-icon.issues { color: #F44336; background-color: rgba(244, 67, 54, 0.1); }
+.charts-grid-main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.5rem;
+}
+
+.chart-box.card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
+}
+
+.chart-box h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--text-main);
+}
+
+.pie-container, .bar-container {
+  height: 250px;
+  position: relative;
+}
+
+/* Custom Premium Table */
+.card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.custom-table th {
+  text-align: left;
+  padding: 1rem;
+  background: var(--bg-color);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.custom-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-main);
+}
+
+.risk-pill {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.risk-pill.high {
+  background: rgba(244, 67, 54, 0.1);
+  color: #f44336;
+}
+
+.risk-pill.medium {
+  background: rgba(255, 152, 0, 0.1);
+  color: #ff9800;
+}
+
+.risk-pill.low {
+  background: rgba(76, 175, 80, 0.1);
+  color: #4caf50;
+}
+
+.empty-msg {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-muted);
+}
+
+.mt-4 { margin-top: 1.5rem; }
+.full-width { grid-column: 1 / -1; }
+
+[data-theme='dark'] .alert-card {
+  backdrop-filter: blur(10px);
+}
+
