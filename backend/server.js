@@ -6,12 +6,18 @@ const mysql = require('mysql2/promise'); // using promise wrapper for async/awai
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://academic-forecase-platform.vercel.app"
+];
+
+if (process.env.FRONTEND_URL) {
+  allowedOrigins.push(process.env.FRONTEND_URL);
+}
+
 // Middleware
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://academic-forecase-platform.vercel.app"
-  ],
+  origin: allowedOrigins,
   credentials: true
 }));
 app.use(express.json());
