@@ -8,8 +8,10 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: "https://academic-forecase-platform.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  origin: [
+    "http://localhost:5173",
+    "https://academic-forecase-platform.vercel.app"
+  ],
   credentials: true
 }));
 app.use(express.json());
@@ -24,9 +26,6 @@ async function initializeDatabase() {
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      ssl: {
-        rejectUnauthorized: false
-      }
     });
     console.log('Database pool created successfully.');
   } catch (err) {

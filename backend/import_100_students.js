@@ -111,7 +111,7 @@ const generateStudentEmail = async (fullName, c, currentUserId = null) => {
     let parts = fullName.trim().split(/\s+/);
     let firstName = parts[0].toLowerCase();
     let initial = parts.length > 1 ? parts[1].replace(/[^a-zA-Z]/g, '').toLowerCase() : '';
-    
+
     // name.ec23@bitsathy.ac.in
     let email1 = firstName + ".ec23@bitsathy.ac.in";
     let [res1] = await c.query('SELECT id FROM users WHERE email = ? AND id != IFNULL(?, -1)', [email1, currentUserId]);
@@ -119,7 +119,7 @@ const generateStudentEmail = async (fullName, c, currentUserId = null) => {
         usedEmails.add(email1);
         return email1;
     }
-    
+
     // nameinitial.ec23@bitsathy.ac.in
     let email2 = firstName + initial + ".ec23@bitsathy.ac.in";
     let [res2] = await c.query('SELECT id FROM users WHERE email = ? AND id != IFNULL(?, -1)', [email2, currentUserId]);
@@ -127,10 +127,10 @@ const generateStudentEmail = async (fullName, c, currentUserId = null) => {
         usedEmails.add(email2);
         return email2;
     }
-    
+
     // Fallback if both exist
     let counter = 1;
-    while(true) {
+    while (true) {
         let email3 = firstName + initial + counter + ".ec23@bitsathy.ac.in";
         let [res3] = await c.query('SELECT id FROM users WHERE email = ? AND id != IFNULL(?, -1)', [email3, currentUserId]);
         if (res3.length === 0 && !usedEmails.has(email3)) {
@@ -144,10 +144,10 @@ const generateStudentEmail = async (fullName, c, currentUserId = null) => {
 const generateFacultyEmail = async (fFirstName, c, currentUserId = null) => {
     let base = fFirstName.replace(/\s+/g, '').toLowerCase();
     let email = base + "@bitsathy.ac.in";
-    
+
     let [res] = await c.query('SELECT id FROM users WHERE email = ? AND id != IFNULL(?, -1)', [email, currentUserId]);
     let counter = 1;
-    while(res.length > 0 || usedEmails.has(email)) {
+    while (res.length > 0 || usedEmails.has(email)) {
         email = base + counter + "@bitsathy.ac.in";
         [res] = await c.query('SELECT id FROM users WHERE email = ? AND id != IFNULL(?, -1)', [email, currentUserId]);
         counter++;
@@ -167,7 +167,7 @@ async function importStudents() {
 
     try {
         const hashedPassword = await bcrypt.hash('password123', 10);
-        
+
         // Parse rows
         const rows = rawData.trim().split('\n').filter(r => r.trim() !== '');
         let insertedStus = 0;
@@ -196,13 +196,13 @@ async function importStudents() {
 
             // 1. Resolve Faculty
             let checkKey = assignedFacultyRaw.toLowerCase();
-            
+
             // Map the excel string to the existing faculty name in DB if possible
             if (checkKey.includes('daniel raj')) checkKey = 'dr. daniel raj  a';
             else if (checkKey.includes('ramya')) checkKey = 'dr. ramya p';
             else if (checkKey.includes('ramkumar')) checkKey = 'dr. ramkumar r';
             else if (checkKey.includes('tamilselvan')) checkKey = 'mr. tamilselvan s';
-            else if (checkKey.includes('arun kumar r aids')) checkKey = 'dr. arun kumar r aids';
+            else if (checkKey.includes('arun kumar r')) checkKey = 'dr. arun kumar r';
             else if (checkKey.includes('dhanalakshmi')) checkKey = 'mrs. dhanalakshmi  s';
             else if (checkKey.includes('karthikeyan')) checkKey = 'mr. karthikeyan  s';
 
@@ -210,16 +210,16 @@ async function importStudents() {
             let pieces = assignedFacultyRaw.split(' ');
             let fTitle = pieces[0];
             let fFirstName = pieces.slice(1, -2).join(' ') || "Unknown";
-            let fDept = pieces[pieces.length-1];
+            let fDept = pieces[pieces.length - 1];
             const fFullName = fTitle + " " + fFirstName + " " + fDept;
-            
+
             if (facultiesCache[checkKey]) {
                 targetFacultyId = facultiesCache[checkKey];
-                
+
                 // Update faculty email
                 const email = await generateFacultyEmail(fFirstName, c, targetFacultyId);
                 await c.query("UPDATE users SET email = ? WHERE id = ?", [email, targetFacultyId]);
-                
+
             } else {
                 const email = await generateFacultyEmail(fFirstName, c);
                 const [insU] = await c.query(
@@ -239,7 +239,7 @@ async function importStudents() {
             let sId;
             if (ex.length > 0) {
                 sId = ex[0].id;
-                
+
                 // Update student email
                 const stuEmail = await generateStudentEmail(name, c, sId);
                 await c.query("UPDATE users SET email = ? WHERE id = ?", [stuEmail, sId]);
@@ -268,7 +268,7 @@ async function importStudents() {
         }
 
         console.log("Successfully processed and updated emails for " + insertedStus + " students.");
-    } catch(err) {
+    } catch (err) {
         console.error("Import failed:", err);
     } finally {
         await c.end();
